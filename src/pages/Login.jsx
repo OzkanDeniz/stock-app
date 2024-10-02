@@ -10,9 +10,12 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { Formik, Form } from "formik";
 import { object, string, number, date, InferType } from "yup";
-import { login } from "../services/apiRequests";
+// import { login } from "../services/useApiRequests";
+import useApiRequests from "../services/useApiRequests";
 
 const Login = () => {
+
+  const {login} = useApiRequests()
   const loginSchema = object({
     password: string()
       .required("Şifre zorunludur!")
