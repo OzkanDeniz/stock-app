@@ -19,12 +19,17 @@ const Login = () => {
       .max(16, "Şifre en fazla 16 karakter içermelidir!")
       .matches(/[a-z]+/, "Şifre en az bir küçük harf içermelidir!")
       .matches(/[A-Z]+/, "Şifre en az bir büyük harf içermelidir!")
-      .matches(/[@$!%*?&]+/, "Şifre en az bir özel karakter (@$!%*?&) içermelidir!"),
+      .matches(
+        /[@$!%*?&]+/,
+        "Şifre en az bir özel karakter (@$!%*?&) içermelidir!"
+      ),
 
-    email: string().email("Lütfen geçerli email giriniz").required(),
+    email: string()
+      .email("Lütfen geçerli email giriniz")
+      .required("Email zorunludur!"),
   });
 
-  return (
+  return ( 
     <Container maxWidth="lg">
       <Grid
         container
