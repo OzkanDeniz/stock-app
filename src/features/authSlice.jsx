@@ -1,11 +1,29 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit"; //?Global State
 
 const authSlice = createSlice({
   name: "auth",
 
-  initialState: {},
-  reducers: {},
-})
+  initialState: {
+    token: "",
+    username: "",
+    loading: "",
+    error: "",
+  },
+  reducers: {
+    fetchStart: (state) => {
+      state.loading = true;
+    },
+    loginSuccess: (state, { payload }) => {
+      state.token = payload.token;
+      state.username = payload.user.username;
+      state.loading = false;
+    },
+    fetchFail: (state) => {
+      state.loading = false;
+      state.error = true;
+    },
+  },
+});
 
-export const {} = authSlice.actions
-export default authSlice.reducer
+export const {fetchStart,loginSuccess,fetchFail} = authSlice.actions;
+export default authSlice.reducer;
