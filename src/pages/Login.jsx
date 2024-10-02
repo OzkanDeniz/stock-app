@@ -13,7 +13,7 @@ import { object, string, number, date, InferType } from "yup";
 
 const Login = () => {
   const loginSchema = object({
-    password: string().required(),
+    password: string().required().min(8).max(16),
     email: string().email("Lütfen geçerli email giriniz").required(),
   });
 
@@ -67,7 +67,7 @@ const Login = () => {
               actions.setSubmitting(false); //? isSubmitting (Boolean)
             }}
           >
-            {({ isSubmitting, handleChange, values, touched, errors }) => (
+            {({ isSubmitting, handleChange, values, touched, errors,handleBlur }) => (
               <Form>
                 <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
                   <TextField
@@ -78,6 +78,7 @@ const Login = () => {
                     variant="outlined"
                     // onChange={(e)=> [e.target.id] = e.target.value} //normalde ilgili textfield objesinin güncellenmesi böyle sağlanırdı önceden
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     value={values.email}
                     error={touched.email && Boolean(errors.email)} //errors hataları validation formikten ten gelir fakat bu projede yup tan validateSchemadan gelecek
                     helperText={errors.email}
@@ -89,6 +90,7 @@ const Login = () => {
                     type="password"
                     variant="outlined"
                     onChange={handleChange}
+                    onBlur={handleBlur} //EVENT = {FONSİYON} İKİLİSİ
                     value={values.password}
                     error={touched.password && Boolean(errors.password)}
                     helperText={errors.password}
