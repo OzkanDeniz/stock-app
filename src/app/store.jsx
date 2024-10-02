@@ -3,7 +3,7 @@ import authReducer from "../features/authSlice";
 
 const store = configureStore({
   reducer: {
-    auth: authReducer,
+    auth: authReducer, //Login olmuşmu olmamışmı,token saklanmışmı saklanmamışmı
   },
   devTools: process.env.NODE_ENV !== "production",
 });
