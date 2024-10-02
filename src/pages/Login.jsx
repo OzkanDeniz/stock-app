@@ -81,7 +81,7 @@ const Login = () => {
                     onBlur={handleBlur}
                     value={values.email}
                     error={touched.email && Boolean(errors.email)} //errors hataları validation formikten ten gelir fakat bu projede yup tan validateSchemadan gelecek
-                    helperText={errors.email}
+                    helperText={touched.email && errors.email}
                   />
                   <TextField
                     label="password"
@@ -93,7 +93,7 @@ const Login = () => {
                     onBlur={handleBlur} //EVENT = {FONSİYON} İKİLİSİ
                     value={values.password}
                     error={touched.password && Boolean(errors.password)}
-                    helperText={errors.password}
+                    helperText={touched.password && errors.password}
                   />
                   <Button
                     variant="contained"
