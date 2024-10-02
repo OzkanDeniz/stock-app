@@ -13,7 +13,14 @@ import { object, string, number, date, InferType } from "yup";
 
 const Login = () => {
   const loginSchema = object({
-    password: string().required().min(8).max(16),
+    password: string()
+      .required("Şifre zorunludur!")
+      .min(8, "Şifre en az 8 karakter içermelidir!")
+      .max(16, "Şifre en fazla 16 karakter içermelidir!")
+      .matches(/[a-z]+/, "Şifre en az bir küçük harf içermelidir!")
+      .matches(/[A-Z]+/, "Şifre en az bir büyük harf içermelidir!")
+      .matches(/[@$!%*?&]+/, "Şifre en az bir özel karakter (@$!%*?&) içermelidir!"),
+
     email: string().email("Lütfen geçerli email giriniz").required(),
   });
 
@@ -67,7 +74,14 @@ const Login = () => {
               actions.setSubmitting(false); //? isSubmitting (Boolean)
             }}
           >
-            {({ isSubmitting, handleChange, values, touched, errors,handleBlur }) => (
+            {({
+              isSubmitting,
+              handleChange,
+              values,
+              touched,
+              errors,
+              handleBlur,
+            }) => (
               <Form>
                 <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
                   <TextField
