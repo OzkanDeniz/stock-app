@@ -2,7 +2,7 @@ import axios from "axios";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { fetchFail, fetchStart, loginSuccess } from "../features/authSlice";
+import { fetchFail, fetchStart, loginSuccess,registerSuccess } from "../features/authSlice";
 
 //?Custom hook
 const useApiRequests = () => {
@@ -29,7 +29,19 @@ const useApiRequests = () => {
     }
   };
 
-  const register = async (userData) => {};
+  const register = async (userInfo) => {
+    dispatch(fetchStart());
+    try {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/users/`,
+        userInfo
+      );
+      dispatch(registerSuccess(data));
+      navigate("/stock");
+    } catch (error) {
+      dispatch(fetchFail());
+    }
+  };
 
   return { login, register };
 };
