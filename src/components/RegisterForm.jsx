@@ -12,7 +12,7 @@ export const registerSchema = object({
   lastName: string().max(20, "Kullanıcı adı 10 karakterden az olmalıdır"),
 });
 
-const RegisterForm = () => {
+const RegisterForm = ({ values, handleChange, errors, tocuhed, handleBlur }) => {
   return (
     <Form>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
