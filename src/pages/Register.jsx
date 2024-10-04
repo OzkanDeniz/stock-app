@@ -56,8 +56,8 @@ const Register = () => {
               username: "",
               password: "",
               email: "",
-              firstName: "",
-              lastName: "",
+              firstname: "",
+              lastname: "",
             }}
             validationSchema={registerSchema}
             onSubmit={(values, actions) => {
