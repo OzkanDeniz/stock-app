@@ -1,13 +1,19 @@
 import axios from "axios";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { fetchFail, fetchStart, loginSuccess,registerSuccess } from "../features/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchFail,
+  fetchStart,
+  loginSuccess,
+  registerSuccess,
+} from "../features/authSlice";
 
 //?Custom hook
 const useApiRequests = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const {token} = useSelector((state)=>state.auth)
 
   const login = async (userData) => {
     // const BASE_URL = "https://14111.fullstack.clarusway.com";
@@ -43,7 +49,20 @@ const useApiRequests = () => {
     }
   };
 
-  return { login, register };
+  const logout = async () => {
+    // dispatch(fetchStart());
+    try {
+      await axios(`${process.env.REACT_APP_BASE_URL}/auth/logout/`, {
+        headers:{Authorization:`Token ${token}`},//?APİ LERE Authorization kısmı bu şekilde konulur /auth/logout/` den sonraki kısımı ifade eder.
+      });
+      // dispatch(registerSuccess(data));
+      // navigate("/stock");
+    } catch (error) {
+      // dispatch(fetchFail());
+    }
+  };
+
+  return { login, register, logout };
 };
 
 export default useApiRequests;
