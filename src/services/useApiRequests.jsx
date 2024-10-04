@@ -7,6 +7,7 @@ import {
   fetchStart,
   loginSuccess,
   registerSuccess,
+  logoutSuccess
 } from "../features/authSlice";
 
 //?Custom hook
@@ -50,15 +51,15 @@ const useApiRequests = () => {
   };
 
   const logout = async () => {
-    // dispatch(fetchStart());
+    dispatch(fetchStart());
     try {
       await axios(`${process.env.REACT_APP_BASE_URL}/auth/logout/`, {
         headers:{Authorization:`Token ${token}`},//?APİ LERE Authorization kısmı bu şekilde konulur /auth/logout/` den sonraki kısımı ifade eder.
       });
-      // dispatch(registerSuccess(data));
-      // navigate("/stock");
+      dispatch(logoutSuccess());
+      navigate("/");
     } catch (error) {
-      // dispatch(fetchFail());
+      dispatch(fetchFail());
     }
   };
 
