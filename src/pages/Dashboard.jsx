@@ -1,6 +1,37 @@
-//
+// import React from "react"
+// import AppBar from "@mui/material/AppBar"
+// import Box from "@mui/material/Box"
+// import CssBaseline from "@mui/material/CssBaseline"
+
+// import Toolbar from "@mui/material/Toolbar"
+// import Button from "@mui/material/Button"
+// import Typography from "@mui/material/Typography"
+// import { useSelector } from "react-redux"
+// import { logout } from "@mui/icons-material"
+// import useApiRequests from "../services/useApiRequests"
+
+// function Dashboard() {
+//   const {username} = useSelector((state) => state.auth)//?Global stateden bie şeyi nasıl okuruz useSelcetor ile okunur.
+//   const {logout} = useApiRequests()
+
+//   return (
+//     <Box sx={{ display: "flex" }}>
+//       <CssBaseline />
+//       <AppBar position="fixed">
+//         <Toolbar>
+//           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+//             STOCK APP
+//           </Typography>
+//           {username && <Button color="inherit" onClick={logout}>Logout</Button>}
+//         </Toolbar>
+//       </AppBar>
+//     </Box>
+//   )
+// }
+
+// export default Dashboard
+
 import * as React from "react";
-import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -17,10 +48,15 @@ import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import { useSelector } from "react-redux";
+import useApiRequests from "../services/useApiRequests";
 
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
+  const { username } = useSelector((state) => state.auth); //?Global stateden bie şeyi nasıl okuruz useSelcetor ile okunur.
+  const { logout } = useApiRequests();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
@@ -96,9 +132,14 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Responsive drawer
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            STOCK APP
           </Typography>
+          {username && (
+            <Button color="inherit" onClick={logout}>
+              Logout
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
       <Box
