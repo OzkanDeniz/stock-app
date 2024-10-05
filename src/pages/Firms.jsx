@@ -11,6 +11,7 @@ const Firms = () => {
       const { data } = await axios(`${process.env.REACT_APP_BASE_URL}/firms`, {
         headers: { Authorization: `Token ${token}` },
       });
+      console.log(data)
     } catch (error) {
       console.log(error);
     }
