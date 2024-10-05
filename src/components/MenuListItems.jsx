@@ -22,27 +22,27 @@ const MenuListItems = () => {
     {
       tittle: "Purchases",
       icon: <ShoppingBasketIcon />,
-      path: "/purchases/",
+      path: "/stock/purchases/",
     },
     {
       tittle: "Sales",
       icon: <AttachMoneyIcon />,
-      path: "/sales/",
+      path: "/stock/sales/",
     },
     {
       tittle: "Firms",
       icon: <StoreIcon />,
-      path: "/firms/",
+      path: "/stock/firms/",
     },
     {
       tittle: "Brands",
       icon: <StarsIcon />,
-      path: "/brands/",
+      path: "/stock/brands/",
     },
     {
       tittle: "Products",
       icon: <InventoryIcon />,
-      path: "/products/",
+      path: "/stock/products/",
     },
   ];
 
@@ -54,6 +54,11 @@ const MenuListItems = () => {
             key={index}
             disablePadding
             onClick={() => navigate(item.path)}
+            sx={{
+              "& .MuiSvgIcon-root": {color: "white"},
+              "&:hover": {color: "red"},
+              "&:hover .MuiSvgIcon-root": {color: "red"},
+            }}
           >
             <ListItemButton>
               <ListItemIcon>{item.icon}</ListItemIcon>
