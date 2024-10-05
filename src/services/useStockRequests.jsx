@@ -1,11 +1,20 @@
-import React from 'react'
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const useStockRequests = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  const { token } = useSelector((state) => state.auth);
+  const getFirms = async () => {
+    try {
+      const { data } = await axios(`${process.env.REACT_APP_BASE_URL}/firms`, {
+        headers: { Authorization: `Token ${token}` },
+      });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-export default useStockRequests
+  return { getFirms };
+};
+
+export default useStockRequests;
