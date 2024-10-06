@@ -14,14 +14,14 @@ import useStockRequests from "../services/useStockRequests";
 //   }
 // };
 
-
 const Firms = () => {
   // const { token } = useSelector((state) => state.auth);
-  
-const {getFirms} = useStockRequests()
+
+  const { getFirms, getSales } = useStockRequests();
   //?Sayfa yüklendikten sonra firmaları getir.
   useEffect(() => {
     getFirms();
+    getSales();
   }, []);
 
   return <div>Firms</div>;
