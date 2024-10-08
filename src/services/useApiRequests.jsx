@@ -27,7 +27,7 @@ const useApiRequests = () => {
       );
       toastSuccessNotify("Login işlemi başarılı");
       dispatch(loginSuccess(data));
-      navigate("stock"); //? useNavigate hookunu ya bir react component içinde çağırılabilir yada bir cosutom(özel) hooke da çağırılabilir burası bir js fonksiyonu yazdık bir component değil burada amcımız generic bir js fonsksiyonu yazmamızın amacı her yerde kullanabilmek için bu yüzden custom hook yazmalıyız (custom hook jsx return etmez ama içinde hook kullanılabilir bu yüzden ismini değiştirdik useApiRequests yaptık)
+      navigate("stock"); 
       console.log(data);
     } catch (error) {
       toastErrorNotify("Login işlemi başarısız");
@@ -67,3 +67,4 @@ const useApiRequests = () => {
 };
 
 export default useApiRequests;
+//? useNavigate hookunu ya bir react component içinde çağırılabilir yada bir cosutom(özel) hooke da çağırılabilir burası bir js fonksiyonu yazdık bir component değil burada amcımız generic bir js fonsksiyonu yazmamızın amacı her yerde kullanabilmek için bu yüzden custom hook yazmalıyız (custom hook jsx return etmez ama içinde hook kullanılabilir bu yüzden ismini değiştirdik useApiRequests yaptık)

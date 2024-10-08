@@ -16,8 +16,8 @@ import useStockRequests from "../services/useStockRequests";
 
 const Firms = () => {
   // const { token } = useSelector((state) => state.auth);
-
-  const { getFirms, getSales,getStock } = useStockRequests();
+  // const { getFirms, getSales,getStock } = useStockRequests();
+  const { getStock } = useStockRequests();
   //?Sayfa yüklendikten sonra firmaları getir.
   useEffect(() => {
     // getFirms();
