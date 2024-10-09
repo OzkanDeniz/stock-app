@@ -1,7 +1,11 @@
 import { useEffect } from "react";
 import useStockRequests from "../services/useStockRequests";
 import Typography from "@mui/material/Typography";
-import  Button  from "@mui/material/Button";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import { useSelector } from "react-redux";
+import FirmCard from "../components/FirmCard";
+
 // import { useSelector } from "react-redux";
 // import axios from "axios";
 
@@ -19,7 +23,10 @@ import  Button  from "@mui/material/Button";
 const Firms = () => {
   // const { token } = useSelector((state) => state.auth);
   // const { getFirms, getSales,getStock } = useStockRequests();
+
   const { getStock } = useStockRequests();
+  const { firms } = useSelector((state) => state.stock);
+
   //?Sayfa yüklendikten sonra firmaları getir.
   useEffect(() => {
     // getFirms();
@@ -29,8 +36,18 @@ const Firms = () => {
 
   return (
     <div>
-      <Typography variant="h5" color={"error"} mb={2} >Firms</Typography>
+      <Typography variant="h5" color={"error"} mb={2}>
+        Firms
+      </Typography>
       <Button variant="contained">NEW FİRM</Button>
+
+      <Grid container>
+        {firms.map((firm) => (
+          <Grid item>
+            <FirmCard firm={firm}/>
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 };
