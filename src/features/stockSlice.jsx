@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit"; //?rxS = reduxSlice kısayolu
 
 const initialState = {
-  firms: "",
-  products: "",
-  sales: "",
-  purchases: "",
-  brands: "",
-  categories: "",
-  loading: "",
-  error: "",
+  firms: [{}],
+  products: [],
+  sales: [],
+  purchases: [],
+  brands: [],
+  categories: [],
+  loading: [],
+  error: [],
 };
 
 const stockSlice = createSlice({

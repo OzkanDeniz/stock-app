@@ -11,7 +11,7 @@ import useAxios from "./useAxios";
 
 const useStockRequests = () => {
   // const { token } = useSelector((state) => state.auth);
-  const {axiosToken}= useAxios()
+  const { axiosToken } = useAxios();
   const dispatch = useDispatch();
 
   // const getFirms = async () => {
@@ -67,8 +67,18 @@ const useStockRequests = () => {
     }
   };
 
+  const deleteStock = async (path, id) => {
+    dispatch(fetchStart());
+    try {
+      await axiosToken.delete(`${path}/${id}`);
+      getStock(path);
+    } catch (error) {
+      dispatch(fetchFail());
+    }
+  };
+
   // return { getFirms, getSales, getStock };
-  return { getStock };
+  return { getStock,deleteStock};
 };
 
 export default useStockRequests;
