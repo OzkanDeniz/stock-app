@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import useStockRequests from "../services/useStockRequests";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -27,6 +27,9 @@ const Firms = () => {
 
   const { getStock } = useStockRequests();
   const { firms } = useSelector((state) => state.stock);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   //?Sayfa yüklendikten sonra firmaları getir.
   useEffect(() => {
@@ -40,10 +43,10 @@ const Firms = () => {
       <Typography variant="h5" color={"error"} mb={2}>
         Firms
       </Typography>
-      <Button variant="contained" sx={{ mb: 2 }}>
+      <Button variant="contained" sx={{ mb: 2 }} onClick={handleOpen}>
         NEW FİRM
       </Button>
-      <FirmModal/>
+      <FirmModal open={open} handleClose={handleClose}/>
 
       <Grid container justifyContent={"center"} gap={2}>
         {firms.map((firm, index) => (
