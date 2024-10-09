@@ -26,6 +26,7 @@ const Firms = () => {
 
   const { getStock } = useStockRequests();
   const { firms } = useSelector((state) => state.stock);
+  
 
   //?Sayfa yüklendikten sonra firmaları getir.
   useEffect(() => {
@@ -39,11 +40,11 @@ const Firms = () => {
       <Typography variant="h5" color={"error"} mb={2}>
         Firms
       </Typography>
-      <Button variant="contained">NEW FİRM</Button>
+      <Button variant="contained" sx={{mb:2}}>NEW FİRM</Button>
 
-      <Grid container>
-        {firms.map((firm) => (
-          <Grid item>
+      <Grid container justifyContent={"center"} gap={2}>
+        {firms && firms.map((firm) => (
+          <Grid item key={firm._id}>
             <FirmCard firm={firm}/>
           </Grid>
         ))}
