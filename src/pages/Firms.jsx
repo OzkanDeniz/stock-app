@@ -30,6 +30,8 @@ const Firms = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const initialState = { image: "", address: "", phone: "", name: "" };
+  const [data, setData] = useState(initialState);
 
   //?Sayfa yüklendikten sonra firmaları getir.
   useEffect(() => {
@@ -46,12 +48,12 @@ const Firms = () => {
       <Button variant="contained" sx={{ mb: 2 }} onClick={handleOpen}>
         NEW FİRM
       </Button>
-      <FirmModal open={open} handleClose={handleClose}/>
+      <FirmModal open={open} handleClose={handleClose} data={data} setData={setData}/>
 
       <Grid container justifyContent={"center"} gap={2}>
         {firms.map((firm, index) => (
           <Grid item key={index}>
-            <FirmCard firm={firm} />
+            <FirmCard firm={firm} handleOpen={handleOpen} data={data} setData={setData}/>
           </Grid>
         ))}
       </Grid>

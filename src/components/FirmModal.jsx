@@ -19,13 +19,12 @@ const style = {
   p: 4,
 };
 
-export default function FirmModal({ open, handleClose }) {
+export default function FirmModal({ open, handleClose,data,setData }) {
   //   const [open, setOpen] = React.useState(false);
   //   const handleOpen = () => setOpen(true);
   //   const handleClose = () => setOpen(false);
   const { postStock } = useStockRequests();
-  const initialState = { image: "", address: "", phone: "", name: "" };
-  const [data, setData] = useState(initialState);
+  
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -36,7 +35,7 @@ export default function FirmModal({ open, handleClose }) {
     //?POST REQUEST
     postStock("firms", data);
     //?RESET FORM
-    setData({ initialState });
+    setData({ image: "", address: "", phone: "", name: "" });
     //?CLOSE MODAL
     handleClose()
   };
@@ -63,6 +62,7 @@ export default function FirmModal({ open, handleClose }) {
               variant="outlined"
               value={data.name}
               onChange={handleChange}
+              required
             />
             <TextField
               label="Phone"
@@ -72,6 +72,7 @@ export default function FirmModal({ open, handleClose }) {
               variant="outlined"
               value={data.phone}
               onChange={handleChange}
+              required
             />
             <TextField
               label="Address"
@@ -81,6 +82,7 @@ export default function FirmModal({ open, handleClose }) {
               variant="outlined"
               value={data.address}
               onChange={handleChange}
+              required
             />
             <TextField
               label="Image"
@@ -90,6 +92,7 @@ export default function FirmModal({ open, handleClose }) {
               variant="outlined"
               value={data.image}
               onChange={handleChange}
+              required
             />
             <Button variant="contained" type="submit">
               Submit
