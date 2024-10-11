@@ -1,5 +1,6 @@
 // import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 import {
   fetchFail,
   fetchStart,
@@ -72,8 +73,10 @@ const useStockRequests = () => {
     try {
       await axiosToken.delete(`${path}/${id}`);
       getStock(path);
+      toastSuccessNotify("successfully deleted!")
     } catch (error) {
       dispatch(fetchFail());
+      toastErrorNotify("could not be deleted!")
     }
   };
   const postStock = async (path,data) => {
@@ -81,8 +84,10 @@ const useStockRequests = () => {
     try {
       await axiosToken.post(path,data);
       getStock(path);
+      toastSuccessNotify("data insertion successful!")
     } catch (error) {
       dispatch(fetchFail());
+      toastErrorNotify("could notdata insertion failed!")
     }
   };
 
