@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
+import useStockRequests from "../services/useStockRequests";
 
 const style = {
   position: "absolute",
@@ -22,16 +23,24 @@ export default function FirmModal({ open, handleClose }) {
   //   const [open, setOpen] = React.useState(false);
   //   const handleOpen = () => setOpen(true);
   //   const handleClose = () => setOpen(false);
-  const [data,setData] = useState({
-    image: "",
-    address: "",
-    phone: "",
-    name: "",
-  });
-  const handleChange = (e)=>{
-    setData({...data, [e.target.name]:e.target.value})
-  }
-  console.log(data)
+  const { postStock } = useStockRequests();
+  const initialState = { image: "", address: "", phone: "", name: "" };
+  const [data, setData] = useState(initialState);
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    //TODO
+    //?POST REQUEST
+    postStock("firms", data);
+    //?RESET FORM
+    setData({ initialState });
+    //?CLOSE MODAL
+    handleClose()
+  };
+  console.log(data);
   return (
     <div>
       <Modal
@@ -41,7 +50,11 @@ export default function FirmModal({ open, handleClose }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <Box
+            sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+            component="form"
+            onSubmit={handleSubmit}
+          >
             <TextField
               label="Firm Name"
               name="name"
